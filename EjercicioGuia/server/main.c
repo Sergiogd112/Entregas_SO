@@ -34,6 +34,7 @@ int main(int argc, char const *argv[])
         int code = 1;
         while (code != 0)
         {
+            printf("Esperando peticion\n");
             ret = read(sock_conn, request, sizeof(request));
 
             printf("Recibido\n");
@@ -45,10 +46,11 @@ int main(int argc, char const *argv[])
             char *p = strtok(request, "/");
 
             int code = atoi(p);
+            char name[20];
+
             if (code != 0)
             {
                 p = strtok(NULL, "/");
-                char name[20];
                 strcpy(name, p);
                 printf("Codigo: %d, Nombre %s\n", code, name);
 
