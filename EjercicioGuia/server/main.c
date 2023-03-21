@@ -31,6 +31,7 @@ int main(int argc, char const *argv[])
 
         sock_conn = accept(sock_listen, NULL, NULL);
         printf("He recibido conexion\n");
+        int code = 1;
         while (code != 0)
         {
             ret = read(sock_conn, request, sizeof(request));
@@ -44,12 +45,13 @@ int main(int argc, char const *argv[])
             char *p = strtok(request, "/");
 
             int code = atoi(p);
-            p = strtok(NULL, "/");
-            char name[20];
-            strcpy(name, p);
-            printf("Codigo: %d, Nombre %s\n", code, name);
             if (code != 0)
             {
+                p = strtok(NULL, "/");
+                char name[20];
+                strcpy(name, p);
+                printf("Codigo: %d, Nombre %s\n", code, name);
+
                 if (code == 1)
                 {
                     sprintf(response, "%ld", strlen(name));

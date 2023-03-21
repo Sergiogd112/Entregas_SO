@@ -97,6 +97,9 @@ namespace Client
 
         private void Disconnect_Click(object sender, EventArgs e)
         {
+            string message = "0/";
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+            server.Send(msg);
             this.BackColor = Color.DimGray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
