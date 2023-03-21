@@ -33,6 +33,10 @@
             bonito = new RadioButton();
             Longitud = new RadioButton();
             Enviar = new Button();
+            Connect = new Button();
+            Disconnect = new Button();
+            alto = new RadioButton();
+            Altura = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -86,12 +90,55 @@
             Enviar.UseVisualStyleBackColor = true;
             Enviar.Click += Enviar_Click;
             // 
+            // Connect
+            // 
+            Connect.Location = new Point(590, 49);
+            Connect.Name = "Connect";
+            Connect.Size = new Size(185, 52);
+            Connect.TabIndex = 5;
+            Connect.Text = "Connectar";
+            Connect.UseVisualStyleBackColor = true;
+            Connect.Click += Connect_Click;
+            // 
+            // Disconnect
+            // 
+            Disconnect.Location = new Point(587, 141);
+            Disconnect.Name = "Disconnect";
+            Disconnect.Size = new Size(190, 63);
+            Disconnect.TabIndex = 6;
+            Disconnect.Text = "Desconectar";
+            Disconnect.UseVisualStyleBackColor = true;
+            Disconnect.Click += Disconnect_Click;
+            // 
+            // alto
+            // 
+            alto.AutoSize = true;
+            alto.ForeColor = SystemColors.ControlLightLight;
+            alto.Location = new Point(196, 225);
+            alto.Name = "alto";
+            alto.Size = new Size(141, 24);
+            alto.TabIndex = 7;
+            alto.TabStop = true;
+            alto.Text = "Dime si soy alt@";
+            alto.UseVisualStyleBackColor = true;
+            // 
+            // Altura
+            // 
+            Altura.Location = new Point(363, 225);
+            Altura.Name = "Altura";
+            Altura.Size = new Size(178, 27);
+            Altura.TabIndex = 8;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(800, 450);
+            Controls.Add(Altura);
+            Controls.Add(alto);
+            Controls.Add(Disconnect);
+            Controls.Add(Connect);
             Controls.Add(Enviar);
             Controls.Add(Longitud);
             Controls.Add(bonito);
@@ -111,5 +158,9 @@
         private RadioButton bonito;
         private RadioButton Longitud;
         private Button Enviar;
+        private Button Connect;
+        private Button Disconnect;
+        private RadioButton alto;
+        private TextBox Altura;
     }
 }

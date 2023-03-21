@@ -36,33 +36,57 @@ namespace Client
             server = new Socket(AddressFamily.InterNetwork,
                 SocketType.Stream,
                 ProtocolType.Tcp);
+
+            server.Connect(ipep);
+            this.BackColor = Color.Green;
+            if (Longitud.Checked)
+            {
+                string message = "1/" + Nombre.Text;
+                byte[] msg = Encoding.ASCII.GetBytes(message);
+                server.Send(msg);
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                message = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                MessageBox.Show("La longitud del nombre es: " + message);
+            }
+            else if (bonito.Checked)
+            {
+                string message = "2/" + Nombre.Text;
+                byte[] msg = Encoding.ASCII.GetBytes(message);
+                server.Send(msg);
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                message = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                MessageBox.Show("¿Es bonito tu nombre? " + message);
+            }
+            else
+            {
+                string message = "3/" + Nombre.Text + "/" + Altura.Text;
+                byte[] msg = Encoding.ASCII.GetBytes(message);
+                server.Send(msg);
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                message = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                MessageBox.Show(message);
+            }
+
+
+        }
+
+        private void Connect_Click(object sender, EventArgs e)
+        {
+            IPAddress address = IPAddress.Parse("172.23.134.41");
+            IPEndPoint ipep = new IPEndPoint(address, 9050);
+
+
+            server = new Socket(AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp);
             try
             {
                 server.Connect(ipep);
                 this.BackColor = Color.Green;
-                if (Longitud.Checked)
-                {
-                    string message = "1/" + Nombre.Text;
-                    byte[] msg = Encoding.ASCII.GetBytes(message);
-                    server.Send(msg);
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    message = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    MessageBox.Show("La longitud del nombre es: " + message);
-                }
-                else
-                {
-                    string message = "2/" + Nombre.Text;
-                    byte[] msg = Encoding.ASCII.GetBytes(message);
-                    server.Send(msg);
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    message = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    MessageBox.Show("¿Es bonito tu nombre? " + message);
-                }
-                this.BackColor = Color.DimGray;
-                server.Shutdown(SocketShutdown.Both);
-                server.Close();
+                MessageBox.Show("Conectado");
             }
             catch (SocketException ex)
             {
@@ -70,5 +94,13 @@ namespace Client
                 return;
             }
         }
+
+        private void Disconnect_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.DimGray;
+            server.Shutdown(SocketShutdown.Both);
+            server.Close();
+            MessageBox.Show("Desconectado");
+
+        }
     }
-}
