@@ -29,15 +29,7 @@ namespace Client
 
         private void Enviar_Click(object sender, EventArgs e)
         {
-            IPAddress address = IPAddress.Parse("172.23.134.41");
-            IPEndPoint ipep = new IPEndPoint(address, 9050);
-
-
-            server = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream,
-                ProtocolType.Tcp);
-
-            server.Connect(ipep);
+            
             this.BackColor = Color.Green;
             if (Longitud.Checked)
             {
@@ -62,6 +54,7 @@ namespace Client
             else
             {
                 string message = "3/" + Nombre.Text + "/" + Altura.Text;
+                MessageBox.Show(message);
                 byte[] msg = Encoding.ASCII.GetBytes(message);
                 server.Send(msg);
                 byte[] msg2 = new byte[80];

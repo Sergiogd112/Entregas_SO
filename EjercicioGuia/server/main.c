@@ -31,8 +31,7 @@ int main(int argc, char const *argv[])
 
         sock_conn = accept(sock_listen, NULL, NULL);
         printf("He recibido conexion\n");
-        int code = 1;
-        while (code != 0)
+        while (1 == 1)
         {
             printf("Esperando peticion\n");
             ret = read(sock_conn, request, sizeof(request));
@@ -48,36 +47,46 @@ int main(int argc, char const *argv[])
             int code = atoi(p);
             char name[20];
 
-            if (code != 0)
+            if (code == 0)
+            {
+                break;
+            }
+            p = strtok(NULL, "/");
+            strcpy(name, p);
+            printf("Codigo: %d, Nombre: %s\n", code, name);
+            if (code == 1)
+            {
+                sprintf(response, "%ld", strlen(name));
+            }
+            else if (code == 2)
+            {
+                if ((name[0] == 'M') || (name[0] == 'S'))
+                    strcpy(response, "Si");
+                else
+                    strcpy(response, "No");
+            }
+            else if (code == 3)
             {
                 p = strtok(NULL, "/");
-                strcpy(name, p);
-                printf("Codigo: %d, Nombre %s\n", code, name);
-
-                if (code == 1)
-                {
-                    sprintf(response, "%ld", strlen(name));
-                }
-                else if (code == 2)
-                {
-                    if ((name[0] == 'M') || (name[0] == 'S'))
-                        strcpy(response, "Si");
-                    else
-                        strcpy(response, "No");
-                }
-                else if (code == 3)
-                {
-                    p = strtok(NULL, "/");
-                    float heigth = atof(p);
-                    if (heigth > 1.70)
-                        sprintf(response, "%s: eres alto", name);
-                    else
-                        sprintf(response, "%s: no eres alto", name);
-                }
-                printf("Respuesta: %s\n", response);
-                write(sock_conn, response, strlen(response));
+                char heigth_text[20];
+                strcpy(heigth_text, p);
+                float heigth;
+                sscanf(heigth_text,"%f",&heigth);
+                printf("%s=>%f\n", heigth_text,heigth);
+                if (heigth > 1.70)
+                    sprintf(response, "%s: eres alto", name);
+                else
+                    sprintf(response, "%s: no eres alto", name);
+            }else if (code==4)
+            {
+                p = strtok(NULL, "/");
+                char name2[20];
+                strcpy(name2, p);
             }
+            printf("Respuesta: %s\n", response);
+            write(sock_conn, response, strlen(response));
         }
+
         close(sock_conn);
     }
 
