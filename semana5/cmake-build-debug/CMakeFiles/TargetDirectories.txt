@@ -1,0 +1,3 @@
+/mnt/c/Users/sergi/OneDrive/Documentos/GitHub/Entregas_SO/semana5/cmake-build-debug/CMakeFiles/semana5.dir
+/mnt/c/Users/sergi/OneDrive/Documentos/GitHub/Entregas_SO/semana5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/sergi/OneDrive/Documentos/GitHub/Entregas_SO/semana5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
